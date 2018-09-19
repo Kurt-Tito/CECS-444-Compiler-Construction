@@ -16,6 +16,6 @@ prog main { // Find the circumgerence of a circle.
 prog main { //Find the hypotenuse of a right triangle.
 	print( "Input legs> " );
 	a = input( int );
-	b = input( int) ;
+	b = input( int);
 	print( "Hypoentuse= ", ( a * a + b * b ) ^ 0.5 );
 }
