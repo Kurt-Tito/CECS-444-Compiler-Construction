@@ -1,4 +1,4 @@
-prog main { // Find the circumgerence of a circle.
+prog main { // Find the circumference of a circle.
 	pi = 3.14;
 	print( "Input radius> ");
 	rx = input ( float );
