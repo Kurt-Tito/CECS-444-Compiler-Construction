@@ -93,6 +93,14 @@ public class Lexer {
     public Token currentToken() {
         return token;
     }
+
+    //returns the Token's number, used for format printing
+    public String printToken() {
+    	String token = currentToken().toString();
+    	token = token.replaceAll("TOKEN", "");
+    	return token;
+    }
+    
     //returns a copy of the next character in the input stream
     public String Peak() {
         return inputstream;
