@@ -4,14 +4,18 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
-
+/**
+* This Lexer class works on creating tokens from words on the given text file.
+*
+*
+*/
 public class Lexer {
     private StringBuilder input = new StringBuilder();
     private Token token;
     private String inputstream;
     private boolean complete = false;
     private Set<Character> empty = new HashSet<Character>();
-
+    //Reads the text file line by line
     public Lexer(String filePath) {
         try (Stream<String> st = Files.lines(Paths.get(filePath))) {
             st.forEach(input::append);
@@ -29,7 +33,11 @@ public class Lexer {
         empty.add((char) 32); //removes start characters
         Advance();
     }
-
+    /**
+    *This advance function moves onto the next character.
+    *
+    *
+    */
     public void Advance() {
         if (complete) {
             return;
@@ -46,7 +54,11 @@ public class Lexer {
 
         complete = true;
     }
-
+    /**
+    *This ignoreWhiteSpace function ignores any blank spaces in the text.
+    *
+    *
+    */
     private void ignoreWhiteSpace() {
         int whiteSpace= 0;
 
@@ -58,7 +70,11 @@ public class Lexer {
             input.delete(0, whiteSpace);
         }
     }
-
+    /**
+    *This findNextToken function gets the next token once it reaches 
+    *the end of one token.
+    *
+    */
     private boolean findNextToken() {
         for (Token t : Token.values()) {
             int end = t.endOfMatch(input.toString());
@@ -73,15 +89,15 @@ public class Lexer {
 
         return false;
     }
-
+    //returns the current Token word
     public Token currentToken() {
         return token;
     }
-
+    //returns a copy of the next character in the input stream
     public String Peak() {
         return inputstream;
     }
-
+    //returns the boolean value of complete
     public boolean isComplete() {
         return complete;
     }
