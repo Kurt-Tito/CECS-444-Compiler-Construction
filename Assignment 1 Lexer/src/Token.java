@@ -1,6 +1,11 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+* This Token class contains the token values of the broken down strings from the text file.
+*
+*
+*/
 public enum Token {
 	TOKEN4 ("\\d+(\\.\\d+)?"),
 	TOKEN3 ("\\d\\d"),
