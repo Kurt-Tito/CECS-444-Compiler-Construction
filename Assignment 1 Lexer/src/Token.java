@@ -63,7 +63,12 @@ public enum Token {
     Token(String regex) { //regex pattern finder
         pattern = Pattern.compile("^" + regex);
     }
-
+	
+    /**        
+    * 
+    *This endOfMatch function finds the end of the token and stops the search for the token once it reaches the end of a pattern
+    *@param s the chars in the token
+    */
     int endOfMatch(String s) {
         Matcher m = pattern.matcher(s);
 
