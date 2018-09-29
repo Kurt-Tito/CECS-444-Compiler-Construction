@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,8 +19,10 @@ public class Lexer {
     private String inputstream;
     private boolean complete = false;
     private Set<Character> empty = new HashSet<Character>();
+    private String filePath;
     //Reads the text file line by line
-    public Lexer(String filePath) {
+    public Lexer(String file) {
+    	filePath = file;
         try (Stream<String> st = Files.lines(Paths.get(filePath))) {
             st.forEach(input::append);
         } catch (IOException ex) {
@@ -101,6 +107,46 @@ public class Lexer {
     	return token;
     }
     
+    //returns the line number where the token is located
+    public int lineNumber() {
+    	return 1;
+    }
+    
+    //checks if the number is an integer
+    public boolean inputIntCheck(String inputstream) {
+    	if(inputstream.matches("-?\\d+")) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    //checks if the number is a float
+    public boolean inputFloatCheck(String inputstream) {
+    	try {
+    		float temp = Float.parseFloat(inputstream);
+    	}
+    	catch (NumberFormatException ex) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+  //returns the line number where the token is located
+    public int lineNumber(String inputstream) throws FileNotFoundException {
+    	Scanner in = new Scanner(new File(filePath));
+    	int line = 1;
+    	while(in.hasNext()) {
+    		String str = in.nextLine();
+    		if(str.contains(inputstream)) {
+    			return line;
+    		}
+    		line++;
+    		str = "";
+    		in.reset();
+    	}
+    	return line;
+
+}
     //returns a copy of the next character in the input stream
     public String Peak() {
         return inputstream;
