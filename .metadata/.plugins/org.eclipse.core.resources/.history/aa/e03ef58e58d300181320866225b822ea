@@ -1,0 +1,88 @@
+package entities.creatures;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import CECS491B.EggHuntArena;
+import CECS491B.EggHuntArenaCell;
+import game.Game;
+import gfx.Assets;
+
+public class Player extends Creature {
+
+	private Game game;
+	private EggHuntArenaCell[][] grid;
+	private Rectangle nextMoveUP = new Rectangle();
+	private Rectangle nextMoveDWN = new Rectangle();
+	private Rectangle nextMoveLFT = new Rectangle();
+	private Rectangle nextMoveRT = new Rectangle();
+	
+	public Player(Game game, int x, int y, EggHuntArena arena) {
+		super(x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+		this.game = game;
+		this.grid = arena.getGrid();
+	}
+
+	public void tick() {
+		getInput();
+		move();
+	}
+	
+	private void getInput(){
+		xMove = 0;
+		yMove = 0;
+		
+		nextMoveUP.setBounds(x, y-(int)speed, 48, 48);
+		nextMoveDWN.setBounds(x, y+(int)speed, 48, 48);
+		nextMoveLFT.setBounds(x-(int)speed, y, 48, 48);
+		nextMoveRT.setBounds(x+(int)speed, y, 48, 48);
+		
+//		if(game.getKeyManager().up)
+//			yMove = -speed;
+//		if(game.getKeyManager().down)
+//			yMove = speed;
+//		if(game.getKeyManager().left)
+//			xMove = -speed;
+//		if(game.getKeyManager().right)
+//			xMove = speed;
+		
+		for (int i = 0; i < grid[0].length; i++)
+		{
+			for (int j = 0; j < grid.length; j++)
+			{
+				
+				if (game.getKeyManager().up && (!nextMoveUP.intersects(grid[j][i])) && !grid[j][i].isBlocked())
+					yMove = -speed;
+				if (game.getKeyManager().up && (nextMoveUP.intersects(grid[j][i])) && grid[j][i].isBlocked())
+					y += speed;
+				
+				if (game.getKeyManager().down  && (!nextMoveDWN.intersects(grid[j][i])) && !grid[j][i].isBlocked())
+					yMove = speed;
+				if (game.getKeyManager().down  && (nextMoveDWN.intersects(grid[j][i])) && grid[j][i].isBlocked())
+					y -= speed;
+				
+				if (game.getKeyManager().left && (!nextMoveLFT.intersects(grid[j][i])) && !grid[j][i].isBlocked())
+					xMove = -speed;
+				if (game.getKeyManager().left && (nextMoveLFT.intersects(grid[j][i])) && grid[j][i].isBlocked())
+					x += speed;
+				
+				if (game.getKeyManager().right && (!nextMoveRT.intersects(grid[j][i])) && !grid[j][i].isBlocked())
+					xMove = speed;
+				if (game.getKeyManager().right && (nextMoveRT.intersects(grid[j][i])) && grid[j][i].isBlocked())
+					x -= speed;
+			}
+		}
+	}
+
+	@Override
+	public void render(Graphics g) {
+		g.drawImage(Assets.playerShooter, (int) x, (int) y, width, height, null);
+		//g.fillRect(x, y, 64, 64);
+		
+		g.setColor(Color.GREEN);
+		g.drawRect(x, y, 48, 48);
+
+	}
+
+}
