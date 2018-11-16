@@ -11,7 +11,6 @@ public class RuleList {
     public RuleList() {
         fillList();
     }
-    
     //returns the grammar rule and its RHS from the A6 Grammar
     public Rule get(int ruleId) {
         if (ruleId > NUM_RULES + 1 || ruleId < 1) {
@@ -20,8 +19,8 @@ public class RuleList {
         //rule with matching rule id returned
         return rules[ruleId - 1];
     }
-    
     //2D array with rules from the Appendix A6 Grammar
+
     private void fillList() {
         rules = new Rule[NUM_RULES];
 
