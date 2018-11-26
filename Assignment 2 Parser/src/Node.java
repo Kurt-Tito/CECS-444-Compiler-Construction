@@ -1,6 +1,3 @@
-package parser.pst;
-
-import runner.sct.SCTNode;
 
 import java.util.ArrayList;
 
