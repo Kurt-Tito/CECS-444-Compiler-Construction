@@ -1,58 +1,81 @@
-/**         Token.java
- *  Class to represent a Token in the A2 Lexcon.
- *
- *  @author Alex Diep
- */
-public class Token {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-    /** Line number the token is at */
-    private int lineNum;
-    /** Actual value of the token */
-    private String value;
-    /** Grammar that holds ID + keyword */
-    private Grammar grammar;
+/**
+* This Token class contains the token values of the broken down strings from the text file.
+*
+*
+*/
+public enum Token {
+	TOKEN4 ("\\d+(\\.\\d+)?"),
+	TOKEN3 ("\\d\\d"),
+	TOKEN5  ("\"[^\"]+\""),
+	TOKEN6  (","),
+	TOKEN7  (";"),
+	TOKEN10 ("prog"),
+	TOKEN11 ("main"),
+	TOKEN12 ("fcn"),
+	TOKEN13 ("class"),
+	
+	TOKEN15 ("float"),
+	TOKEN16 ("int"),
+    TOKEN17 ("string"),
+    TOKEN18 ("if"),
+    TOKEN19 ("elseif"),
+    TOKEN20 ("else"),
+    TOKEN21 ("while"),
+    TOKEN22 ("input"),
+    TOKEN23 ("print"),
+    TOKEN24 ("new"),
+    TOKEN25 ("return"),
+    TOKEN26 ("var"),
+    
+    TOKEN31 ("<"),
+    TOKEN32 (">"),
+    TOKEN33 ("\\{"),
+    TOKEN34 ("\\}"),
+    TOKEN35 ("\\["),
+    TOKEN36 ("\\]"),
+    TOKEN37 ("\\("),
+	TOKEN38 ("\\)"),
+	
+	TOKEN41 ("\\*"),
+	TOKEN42 ("\\^"),
+	TOKEN43 ("\\:"),
+	TOKEN44 ("\\."),
+	TOKEN45 ("="),
+	TOKEN46 ("-"),
+	TOKEN47 ("\\+"),
+	TOKEN48 ("/"),
 
-    public Token(int lineNum, String value) {
-        this.lineNum = lineNum;
-        this.value = value;
-        this.grammar = new Grammar(0, "");
+	TOKEN51 ("->"),
+	TOKEN52 ("=="),
+	TOKEN53 ("!="),
+	TOKEN54 ("<="),
+	TOKEN55 (">="),
+	TOKEN56 ("<<"),
+	TOKEN57 (">>"),
+	TOKEN2 ("\\w+");
+	
+    
+    private final Pattern pattern;
+ 
+    Token(String regex) { //regex pattern finder
+        pattern = Pattern.compile("^" + regex);
     }
+	
+    /**        
+    * 
+    *This endOfMatch function finds the end of the token and stops the search for the token once it reaches the end of a pattern
+    *@param s the chars in the token
+    */
+    int endOfMatch(String s) {
+        Matcher m = pattern.matcher(s);
 
-    // -----------------------------------------------FUNCTIONS -------------------------------------------------------
-    @Override
-    public String toString() {
-        String val = getValue();
-        String number = "";
-        if (grammar.getId() == 3 || grammar.getId() == 4)
-            number = " " + grammar.getKeyword() + "= " + val;
-        else if (grammar.getKeyword().equals("string"))
-            val = value.substring(1, value.length() - 1); // chop off the quotes
+        if (m.find()) {
+            return m.end();
+        }
 
-        return String.format("(Tok:%3d line=%3d str= \"%s\"%s)", grammar.getId(), lineNum, val, number);
-    }
-
-    // --------------------------------------------GETTERS/SETTERS ----------------------------------------------------
-    public Grammar getGrammar() {
-        return grammar;
-    }
-
-    public void setGrammar(Grammar grammar) {
-        this.grammar = grammar;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public int getLineNum() {
-        return lineNum;
-    }
-
-    public void setLineNum(int lineNum) {
-        this.lineNum = lineNum;
+        return -1;
     }
 }

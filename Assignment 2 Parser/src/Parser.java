@@ -50,10 +50,10 @@ public class Parser {
     } 
 
     private static ParseTable init() {
-        Tokenizer tokenizer = new Tokenizer("program.txt");
+        Lexer lex = new Lexer("program.txt");
 
-        if (tokenizer.isReady())
-            tokens = tokenizer.tokenize();
+        if (lex.isComplete())
+            tokens = lex.getTokens();
 
         if (tokens == null || tokens.isEmpty())
             return null;
@@ -126,5 +126,5 @@ public class Parser {
         }
     }
     
-    
+    //d
 } 

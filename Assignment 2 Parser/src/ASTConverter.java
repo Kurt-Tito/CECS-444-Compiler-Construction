@@ -2,34 +2,22 @@
 import java.util.ArrayList;
 
 public class ASTConverter {
-
-    /**
-     * Recursive call that fixes the given node's children, then fixes itself, and returns.
-     * @param root the root of the tree (or equivalent at a certain level)
-     * @return  Node whose self and children have already been fixed/hoisted.
-     */
     public static Node convert(Node root) {
+    	
         if (root != null) {
             ArrayList<Node> children = root.getChildren();
+            
             for (int i = 0; i < children.size(); i++) {
                 Node fixedChild = convert(children.get(i));
-                // remove unnecessary rules that may exist after.
                 fixedChild.getChildren().removeIf(Node::isEpsilonRule);
                 fixedChild = fixExtra(fixedChild);
                 children.set(i, fixedChild);
             }
         }
+        
         return fix(root);
     }
-
-    /**
-     * Helper of convert()
-     *
-     * Fixes the given Node by hoisting up a selected child, depending on what type of Node it is.
-     * If removing unnecessary children nodes, this will alter by reference.
-     * @param pstNode   pstNode to fix.
-     * @return Node that has been fixed.
-     */
+    
     private static Node fix(Node pstNode) {
         Node hoisted = pstNode;
 
@@ -108,11 +96,11 @@ public class ASTConverter {
                         break;
                     case "Term":
                         hoisted = fix0(children);
-                        add = true; // term has a special case where we add children rather than replace them
+                        add = true;
                         break;
-                    default: // default = null or something with only 1 rhs token
+                    default: 
                         hoisted = fix0(children);
-                } // end swtich
+                } 
             }
 
             if (add)
@@ -125,29 +113,24 @@ public class ASTConverter {
         return hoisted;
     }
 
-    // fixes: pgm, vargroup, vardecl, stmts, stasgn, stprint, exprlist, moreexprs, expr, rterm
     private static Node fix1(ArrayList<Node> children) {
         return children.remove(1);
     }
 
-    // fixes: bblock
     private static Node fix2(ArrayList<Node> children) {
         children.remove(0);
         return children.remove(2);
     }
 
-    // fixes: ppvarlist
     private static Node fix3(ArrayList<Node> children) {
         children.remove(0);
         return children.remove(1);
     }
 
-    // fixes: varlist, stwhile, ppexprs, ppexpr1, S, R, Q
     private static Node fix4(ArrayList<Node> children) {
         return children.remove(2);
     }
 
-    // fixes: basekind, varid, stmt, default
     private static Node fix0(ArrayList<Node> children) {
         return children.remove(0);
     }

@@ -20,6 +20,8 @@ public class Lexer {
     private boolean complete = false;
     private Set<Character> empty = new HashSet<Character>();
     private String filePath;
+    private ArrayList<Token> tokens;
+    
     //Reads the text file line by line
     public Lexer(String file) {
     	filePath = file;
@@ -59,6 +61,7 @@ public class Lexer {
         }
 
         complete = true;
+        tokens.add(token);
     }
     /**
     *This ignoreWhiteSpace function ignores any blank spaces in the text.
@@ -154,5 +157,10 @@ public class Lexer {
     //returns the boolean value of complete
     public boolean isComplete() {
         return complete;
+    }
+    
+    public ArrayList<Token> getTokens()
+    {
+    	return tokens;
     }
 }
