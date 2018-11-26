@@ -1,4 +1,6 @@
-
+import lexer.Tokenizer;
+import parser.pst.Node;
+import parser.pst.ASTConverter;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -24,7 +26,7 @@ public class Parser {
         while(!inputStack.empty()) {
 			
             String stackTop = inputStack.peek().getKeyword();
-            String inputFront = tokens.get(0).getGrammar().getKeyword();
+            String inputFront = tokens.get(0).toString();
 			
 			// LL Mechanism 
 
@@ -51,10 +53,10 @@ public class Parser {
     } 
 
     private static ParseTable init() {
-        Tokenizer tokenizer = new Tokenizer("program.txt");
+        Lexer lexer = new Lexer("program.txt");
 
-        if (tokenizer.isReady())
-            tokens = tokenizer.tokenize();
+        if (lexer.isComplete())
+            tokens = lexer.currentToken();
 
         if (tokens == null || tokens.isEmpty())
             return null;
