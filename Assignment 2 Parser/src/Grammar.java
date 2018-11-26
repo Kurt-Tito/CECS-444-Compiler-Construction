@@ -1,4 +1,3 @@
-package lexer;
 
 /**     Grammar.java
  * Class to represent part of the Grammar of the A2 Lexcon. Holds the ID and keyword.
