@@ -1,5 +1,3 @@
-package lexer;
-
 /**         Token.java
  *  Class to represent a Token in the A2 Lexcon.
  *

@@ -1,4 +1,3 @@
-package lexer;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
