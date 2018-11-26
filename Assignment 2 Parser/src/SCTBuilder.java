@@ -1,6 +1,3 @@
-package runner.sct;
-
-import parser.pst.Node;
 
 import java.util.ArrayList;
 
