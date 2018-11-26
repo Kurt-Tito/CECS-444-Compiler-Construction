@@ -1,4 +1,3 @@
-# CECS-444-Compiler-Construction
 444 Compilers — Project #2 — Parser
 CECS 444  11/24/2018
 Group Name: HJK 	
@@ -34,17 +33,16 @@ Assignment 2 Parser: .settings, src, .classpath, .project
 program.txt
 src:
 ASTConverter.java //PST to AST converter
-ASTRunner.java //runs and prints AST converter
+Grammar.java // holds ID and keyword
+Lexer.java // creating tokens from words on the given text file
 main.java //used to run the Parser
 Node.java //Node class keeps track of child and parent nodes to add, remove, replace
+Operations.java // nodes to test
 Parser.java //LL Mechanism
 ParseTable.java //Parse Table via row column values via rules
 Rule.java // rules listed
 RuleList.java //rules listed from A6 grammar
-SCTBuilder.java //build the scope tree from a given AST Node
-SCTNode.java //scope tree node tracking/updating
-TableEntry.java //keeps track of what is entered in the LL Parse Table
-
+Token.java //Tokens in A2 Lexcon
 
 External Requirements: None
 
@@ -79,4 +77,3 @@ Comments are still within lexer, need to remove comments to avoid lexer to displ
 PARSER: Not all A6 Grammar was implemented within the Parser.
 
 Bugs: None found
-
