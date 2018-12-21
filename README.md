@@ -1,4 +1,4 @@
-444 Compilers — Project #2 — Parser
+444 Compilers — Project #3 — Interpreter
 CECS 444  12/20/2018
 Group Name: HJK 	
 Group Members: Jeffrey Heng 012690039, Harry Hoang 013018562, Jimmy Luu 013474849, Kurt Tito 013321839
