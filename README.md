@@ -1,11 +1,11 @@
 444 Compilers — Project #2 — Parser
-CECS 444  11/24/2018
+CECS 444  12/20/2018
 Group Name: HJK 	
 Group Members: Jeffrey Heng 012690039, Harry Hoang 013018562, Jimmy Luu 013474849, Kurt Tito 013321839
 
 Intro: The purpose of this assignment is to use the output from the Lexer to write a backtracking-free LL Predictive Parser. The LL Parser
 will create a PST of Node objects from the A6 grammar given. LL Parse table will be created in order to facilitate converting the A6 grammar
-to simple LL-compatible form.
+to simple LL-compatible form. The purpose of the AST Interpreter is to run the AST as a program. We will build a SCT in order to perform a treewalk of the AST to run the AST executable statements.
 
 Steps:  Unzip and import the project to a java compiler.
 	Use "Tester.java" under "Assignment 1 Lexer" to run the lexer program.
